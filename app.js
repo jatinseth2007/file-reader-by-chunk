@@ -61,9 +61,9 @@ const chunkHandler = async (fileToUpload, startPos, endPos) => {
 const fileUploaderStreamHandler = async (e) => {
   const fileToUpload = e.target.files[0];
   const readableStream = fileToUpload.stream();
-  const reader = readableStream.getReader({});
+  const reader = readableStream.getReader();
   while (true) {
-    const { value, done } = await reader.read(10);
+    const { value, done } = await reader.read();
     // we can call the API here...
     await fileUploaderByStreamHandler(value);
     console.log(value);
