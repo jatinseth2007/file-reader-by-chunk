@@ -33,6 +33,7 @@ const chunkHandler = async (fileToUpload, startPos, endPos) => {
         try {
           console.log(e);
           //we can send API call here and after that resolve...
+          // for example I am doing setTimeout just to prove the concept...
           setTimeout(() => {
             resolve();
           }, 1000);
