@@ -1,11 +1,18 @@
 let $fileUploader;
+let $fileUploaderStream;
 const CHUNK_SIZE = 5000;
 
 const init = () => {
-  $fileUploader = document.querySelector("#file-uploader");
+  $fileUploader = document.querySelector("#file-uploader-chunks");
+  $fileUploaderStream = document.querySelector("#file-uploader-stream");
   $fileUploader.addEventListener("change", fileUploaderHandler);
+  $fileUploaderStream.addEventListener("change", fileUploaderStreamHandler);
 };
 
+/**
+ * Function to upload the file using chunks
+ * Jatin Seth
+ */
 const fileUploaderHandler = async (e) => {
   const fileToUpload = e.target.files[0];
   const totalBytes = fileToUpload.size;
@@ -44,6 +51,33 @@ const chunkHandler = async (fileToUpload, startPos, endPos) => {
     } catch (error) {
       reject(error);
     }
+  });
+};
+
+/**
+ * Function to upload the file using stream
+ * Jatin Seth
+ */
+const fileUploaderStreamHandler = async (e) => {
+  const fileToUpload = e.target.files[0];
+  const readableStream = fileToUpload.stream();
+  const reader = readableStream.getReader({});
+  while (true) {
+    const { value, done } = await reader.read(10);
+    // we can call the API here...
+    await fileUploaderByStreamHandler(value);
+    console.log(value);
+    if (done) break;
+  }
+};
+
+const fileUploaderByStreamHandler = async (value) => {
+  return new Promise((resolve, reject) => {
+    //we can send API call here and after that resolve...
+    // for example I am doing setTimeout just to prove the concept...
+    setTimeout(() => {
+      resolve();
+    }, 1000);
   });
 };
 

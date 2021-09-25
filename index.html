@@ -8,8 +8,15 @@
     <script src="app.js" defer="true"></script>
   </head>
   <body>
+    <h2>Only PNG is allowed</h2>
     <div>
-      Upload the file: <input type="file" id="file-uploader" accept=".png" />
+      Upload the file using chunks file:
+      <input type="file" id="file-uploader-chunks" accept=".png" />
+    </div>
+    <br />
+    <div>
+      Upload the file using streams file:
+      <input type="file" id="file-uploader-stream" accept=".png" />
     </div>
   </body>
 </html>
