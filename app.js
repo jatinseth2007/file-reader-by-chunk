@@ -38,7 +38,7 @@ const chunkHandler = async (fileToUpload, startPos, endPos) => {
       reader.readAsArrayBuffer(fileToUpload.slice(startPos, endPos));
       reader.onload = async (e) => {
         try {
-          console.log(e);
+          console.log(e.target.result, e.target.result.byteLength);
           //we can send API call here and after that resolve...
           // for example I am doing setTimeout just to prove the concept...
           setTimeout(() => {
